@@ -126,8 +126,15 @@ export default class RegistrationFormContainer extends Component<{}, State> {
     if (username.length < 3) {
       return { valid: false, message: "Please enter at least 3 characters" };
     }
-    if (username.length > 16) {
-      return { valid: false, message: "Please enter no more than 16 characters" };
+    if (username.length > 255) {
+      return { valid: false, message: "Please enter no more than 255 characters" };
+    }
+
+    if(!/^\S+@\S+\.\S+$/.test(username)){
+      return {
+        valid: false,
+        message: "Please enter an email address"
+      }
     }
 
     return { valid: true };
